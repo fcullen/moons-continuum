@@ -1,7 +1,4 @@
-*.hdf5
-plot_*
-*.png
-*.dat
-*.cat
 *.docx
 simba_snapshots
+catalogs
+.DS_Store
