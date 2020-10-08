@@ -52,7 +52,10 @@ def make_catalogue(output_file, sanpshot_files):
 
             for filt in filter_names:
 
-                ofile.write('{:15.2f}'.format(gal.appmag[filt]))
+                if gal.appmag[filt] >= 100:
+                    ofile.write('{:15.2f}'.format(-999.))
+                else:
+                    ofile.write('{:15.2f}'.format(gal.appmag[filt]))
 
             ofile.write('\n')
 
@@ -61,7 +64,5 @@ def make_catalogue(output_file, sanpshot_files):
 if __name__ == "__main__":
 
     make_catalogue(output_file='moons_simba_z1p5_galaxies.cat', 
-        sanpshot_files=['./simba_snapshots/m100n1024_085.hdf5', 
-                        './simba_snapshots/m100n1024_090.hdf5', 
-                        './simba_snapshots/m100n1024_098.hdf5'])
+        sanpshot_files=['./simba_snapshots/m100n1024_090.hdf5'])
 
