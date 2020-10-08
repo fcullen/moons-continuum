@@ -2,3 +2,6 @@
 plot_*
 *.png
 *.dat
+*.cat
+*.docx
+simba_snapshots
