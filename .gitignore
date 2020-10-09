@@ -2,3 +2,4 @@
 simba_snapshots
 catalogs
 .DS_Store
+*.cat

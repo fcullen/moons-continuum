@@ -3,8 +3,8 @@ import numpy as np
 
 lssfr_cut = -10.5
 
-# functiosn which return SNR/resolution element at R=1000
-# in the different redshift bins for passive and star-forming galaxies
+# functions that return SNR/resolution element at R=1000
+# for the different redshift bins and for both passive and star-forming galaxies
 def snr_vs_hmag_z1p5_passive(hmag):
 
     lsnr_h = -0.4 * hmag + 10.11
@@ -82,12 +82,12 @@ def make_catalogue(output_file, sanpshot_files):
                     ofile.write('{:15.2f}'.format(gal.appmag[filt]))
 
             # add the snr per resolution element in the three MOONS gratings
-            if (sfr <= 0) | (gal.appmag['vista_h'] >= 100.):
+            if (sfr <= 0) or (gal.appmag['vista_h'] >= 100.):
                 snr_h = -999.
                 snr_yj = -999.
                 snr_ri = -999.
             else:
-                if (redshift > 1.15) & (redshift < 1.75):
+                if (redshift > 1.15) and (redshift < 1.75):
                     if lssfr <= lssfr_cut:
                         snr_h, snr_yj, snr_ri = snr_vs_hmag_z1p5_passive(hmag=gal.appmag['vista_h'])
                     else:
@@ -107,10 +107,15 @@ def make_catalogue(output_file, sanpshot_files):
 
 if __name__ == "__main__":
 
+    z1p5_snapsfiles = ['./simba_snapshots/m100n1024_085.hdf5',
+                       './simba_snapshots/m100n1024_087.hdf5',
+                       './simba_snapshots/m100n1024_088.hdf5', 
+                       './simba_snapshots/m100n1024_090.hdf5',
+                       './simba_snapshots/m100n1024_091.hdf5',
+                       './simba_snapshots/m100n1024_095.hdf5',
+                       './simba_snapshots/m100n1024_096.hdf5',
+                       './simba_snapshots/m100n1024_098.hdf5']
+
     make_catalogue(output_file='moons_simba_z1p5_galaxies.cat', 
-        sanpshot_files=['./simba_snapshots/m100n1024_085.hdf5',
-                        './simba_snapshots/m100n1024_087.hdf5', 
-                        './simba_snapshots/m100n1024_090.hdf5',
-                        './simba_snapshots/m100n1024_095.hdf5',
-                        './simba_snapshots/m100n1024_098.hdf5'])
+        sanpshot_files=z1p5_snapsfiles)
 
